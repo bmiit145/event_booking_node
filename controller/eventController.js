@@ -60,7 +60,13 @@ module.exports = {
     },
 
     getUpcommingEvent: (req, res) => {
-        res.json(upcommingEventData);
+        try{
+            const upcommingEvents = Event.find({ start: { $gte: new Date() } });
+            return res.json(upcommingEvents);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send('Internal Server Error');
+        }
     },
 
     addNewEvent: async (req, res) => {
