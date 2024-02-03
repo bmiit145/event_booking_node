@@ -17,10 +17,18 @@ const eventData = [
 
 module.exports = {
     getAllEvent: (req, res) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        res.header('Referrer-Policy', 'no-referrer'); // or 'same-origin', 'origin', etc.
         res.json(eventData);
     },
 
     getUpcommingEvent: (req, res) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        res.header('Referrer-Policy', 'no-referrer'); // or 'same-origin', 'origin', etc.
         res.json(eventData);
     }
 }

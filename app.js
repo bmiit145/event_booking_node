@@ -1,14 +1,13 @@
 const express = require('express')
 const app = express();
 const port = 4001
+const cors = require('cors');
 
 // Allow requests from any origin
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
+// Enable CORS for all routes
+app.use(cors());
+
+
 
 // app.use(express.json());
 
