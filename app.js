@@ -9,7 +9,7 @@ app.use(cors());
 
 
 
-// app.use(express.json());
+app.use(express.json());
 
 // view engine
 // const hbs = require('hbs')
