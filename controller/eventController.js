@@ -52,6 +52,11 @@ module.exports = {
             // Use Promise.race to wait for either the eventsPromise or timeoutPromise to resolve
             const events = await Promise.race([eventsPromise, timeoutPromise]);
 
+            // replace _id with id
+            events.forEach((event) => {
+                event.id = event._id;
+            });
+
             return res.json(events);
         } catch (error) {
             console.error(error);
@@ -74,12 +79,36 @@ module.exports = {
 
     addNewEvent: async (req, res) => {
         try {
-            const newEvent = new Event(eventData);
+            const newEvent = new Event(req.body);
             await newEvent.save();
-            res.status(201).json(newEvent);
+            res.status(200).json({newEvent ,  message: 'Event added successfully' });
         } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');
         }
-    }
+    },
+
+    updateEvent: async (req, res) => {
+        try {
+            const { id, ...update } = req.body;
+            const updatedEvent = await Event.findOneAndUpdate({ _id: id }, update,  { new: true });
+           return  res.status(200).json({updatedEvent , message: 'Event updated successfully' });
+        } catch (error) {
+            console.error(error);
+           return  res.status(500).send('Internal Server Error');
+        }
+    },
+
+    // delete event where data is passed by heder
+    deleteEvent: async (req, res) => {
+        try {
+            const id = req.header('event') || req.body.id;
+            await Event.deleteOne({ _id: id });
+            return res.status(204).json({ message: 'Event deleted successfully' });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send('Internal Server Error');
+        }
+    },
+
 }

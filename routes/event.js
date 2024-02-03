@@ -13,8 +13,9 @@ const EventController = require("../controller/eventController");
 
 router.get("/events" , EventController.getAllEvent);
 router.get("/upcommingevents" , EventController.getUpcommingEvent);
-//router.post("/addevent" , EventController.addNewEvent);
-router.get("/add" , EventController.addNewEvent);
-
+router.post("/add" , EventController.addNewEvent);
+//router.get("/add" , EventController.addNewEvent);
+router.put("/update" , EventController.updateEvent);
+router.delete("/delete" , EventController.deleteEvent);
 
 module.exports = router;
