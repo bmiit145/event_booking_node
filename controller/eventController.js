@@ -35,7 +35,20 @@ const upcommingEventData = [
 module.exports = {
     getAllEvent: async (req, res) => {
         try {
-            const events = await Event.find();
+            const timeout = 15000;
+
+            // Wrap the entire function logic in a Promise and use setTimeout to implement the timeout
+            const timeoutPromise = new Promise((_, reject) => {
+                setTimeout(() => {
+                    reject(new Error('Function execution timed out'));
+                }, timeout);
+            });
+
+            const eventsPromise = Event.find();
+
+            // Use Promise.race to wait for either the eventsPromise or timeoutPromise to resolve
+            const events = await Promise.race([eventsPromise, timeoutPromise]);
+
             return res.json(events);
         } catch (error) {
             console.error(error);
