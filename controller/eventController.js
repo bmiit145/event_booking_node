@@ -59,9 +59,12 @@ module.exports = {
         }
     },
 
-    getUpcommingEvent: (req, res) => {
+    getUpcommingEvent: async (req, res) => {
         try{
-            const upcommingEvents = Event.find({ start: { $gte: new Date() } });
+            // get all upcomming events by loopup in database
+            const upcommingEvents = await Event.find({
+                start: { $gte: new Date()}
+            }).sort('start');
             return res.json(upcommingEvents);
         } catch (error) {
             console.error(error);
