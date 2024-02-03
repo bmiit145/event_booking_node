@@ -35,7 +35,7 @@ const upcommingEventData = [
 module.exports = {
     getAllEvent: async (req, res) => {
 
-        return  res.json({message : "hello"});
+       // return  res.json({message : "hello"});
 
         try {
             const timeout = 15000;
