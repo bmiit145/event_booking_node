@@ -36,10 +36,10 @@ module.exports = {
     getAllEvent: async (req, res) => {
         try {
             const events = await Event.find();
-            res.json(events);
+            return res.json(events);
         } catch (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
+            return res.status(500).send('Internal Server Error');
         }
     },
 
