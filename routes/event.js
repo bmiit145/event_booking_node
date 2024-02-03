@@ -12,5 +12,6 @@ const router = express.Router();
 const EventController = require("../controller/eventController");
 
 router.get("/events" , EventController.getAllEvent);
+router.get("upcommingevents" , EventController.getUpcommingEvent);
 
 module.exports = router;
