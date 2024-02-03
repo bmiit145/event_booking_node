@@ -22,14 +22,18 @@ app.use(express.urlencoded({ extended: true }));
 
 // mongoes connect
 
-// const mongoose = require('mongoose');
-// mongoose.set('strictQuery', true);
-// mongoose.connect("mongodb://localhost:27017/whatsapp_no" ,{ family : 4})
-// .then(() => {
-//     app.listen(port, () => console.log(`Whatsapp app listening on port ${port}!`));
-// }).catch((err) => {
-//     console.log(err);
-// })
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
+mongoose.connect("mongodb+srv://21bmiit145:root@satnam-decor.kya4kd2.mongodb.net/satnam_decor?retryWrites=true&w=majority" ,{
+    family : 4,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => {
+       console.log("connected to db");
+}).catch((err) => {
+    console.log(err);
+})
 
 
 const routes = require("./router");

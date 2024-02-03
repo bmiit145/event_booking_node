@@ -1,8 +1,10 @@
 
-const eventData = [
+const express = require('express');
+const Event = require('../models/Event');
+
+const eventData =
     {
-        id: 456,
-        title: "Velzon Project Discussion with Team",
+        title: "Project Discussion with Team",
         start: new Date(2024, 1, 3, 20, 0), // Adjust month (0-indexed) as needed
         end: new Date(2024, 1, 4, 16, 0),   // Adjust month (0-indexed) as needed
         allDay: false,
@@ -12,8 +14,7 @@ const eventData = [
             department: "Discussion",
         },
         description: "Tell how to boost website traffic",
-    },
-];
+    };
 
 const upcommingEventData = [
     {
@@ -32,11 +33,28 @@ const upcommingEventData = [
 ];
 
 module.exports = {
-    getAllEvent: (req, res) => {
-        res.json(eventData);
+    getAllEvent: async (req, res) => {
+        try {
+            const events = await Event.find();
+            res.json(events);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
     },
 
     getUpcommingEvent: (req, res) => {
         res.json(upcommingEventData);
+    },
+
+    addNewEvent: async (req, res) => {
+        try {
+            const newEvent = new Event(eventData);
+            await newEvent.save();
+            res.status(201).json(newEvent);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 }

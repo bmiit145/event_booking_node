@@ -13,5 +13,8 @@ const EventController = require("../controller/eventController");
 
 router.get("/events" , EventController.getAllEvent);
 router.get("/upcommingevents" , EventController.getUpcommingEvent);
+//router.post("/addevent" , EventController.addNewEvent);
+router.get("/add" , EventController.addNewEvent);
+
 
 module.exports = router;
