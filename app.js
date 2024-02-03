@@ -24,8 +24,6 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 mongoose.connect("mongodb+srv://21bmiit145:root@satnam-decor.kya4kd2.mongodb.net/satnam_decor?retryWrites=true&w=majority" ,{
     family : 4,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
 })
 .then(() => {
        console.log("connected to db");
