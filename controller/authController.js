@@ -10,7 +10,7 @@ module.exports = {
             // set user as static 
             const user = {
                 id: 1,
-                name: "John Doe",
+                name: "Satnam",
                 email: "21bmiit145@gmail.com",
                 // password: bcrypt.hashSync("123456", 10)
                 password: "123456"
@@ -33,9 +33,11 @@ module.exports = {
                 }
             };
 
+            const jwtSecret = "jwtSecret";
+            
             jwt.sign(
                 payload,
-                process.env.JWT_SECRET,
+                jwtSecret,
                 { expiresIn: 3600 },
                 (err, token) => {
                     if (err) throw err;
