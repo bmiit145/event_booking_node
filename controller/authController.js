@@ -44,7 +44,7 @@ module.exports = {
                 { expiresIn: 3600 },
                 (err, token) => {
                     if (err) throw err;
-                    res.json({ token });
+                    res.json({ token , user , message: 'Logged in successfully' , status: 200 , success: true});
                 }
             );
         } catch (error) {
