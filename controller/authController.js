@@ -1,4 +1,4 @@
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { find } = require('../models/Event');
 const app = require('express');
@@ -15,8 +15,8 @@ module.exports = {
                 first_name: "Satnam",
                 last_name: "Decor",
                 email: "admin@satnam.com",
-                // password: bcrypt.hashSync("123456", 10)
-                password: "123456"
+                password: bcrypt.hashSync("123456", 12)
+                // password: "123456"
             }];
 
             const user = users.find(user => user.email === email)
@@ -25,8 +25,8 @@ module.exports = {
                 return res.status(400).json({ message: 'User not found' });
             }
 
-            // const isMatch = await bcrypt.compare(password, user.password);
-            const isMatch = password === user.password;
+            const isMatch = await bcrypt.compare(password, user.password);
+            // const isMatch = password === user.password;
 
             if (!isMatch) {
                 return res.status(400).json({ message: 'Invalid credentials' });
