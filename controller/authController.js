@@ -10,8 +10,9 @@ module.exports = {
             // set user as static 
             const user = {
                 id: 1,
-                name: "Satnam",
-                email: "21bmiit145@gmail.com",
+                first_name: "Satnam",
+                last_name: "Decor",
+                email: "admin@satnam.com",
                 // password: bcrypt.hashSync("123456", 10)
                 password: "123456"
             }
@@ -29,12 +30,14 @@ module.exports = {
 
             const payload = {
                 user: {
-                    id: user.id
+                    id: user.id,
+                    first_name: user.first_name,
+                    email: user.email
                 }
             };
 
             const jwtSecret = "jwtSecret";
-            
+
             jwt.sign(
                 payload,
                 jwtSecret,
