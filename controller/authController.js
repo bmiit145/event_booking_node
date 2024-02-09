@@ -1,6 +1,7 @@
 // const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { find } = require('../models/Event');
+const app = require('express');
 
 module.exports = {
     // login
@@ -9,14 +10,14 @@ module.exports = {
             const { email, password } = req.body;
 
             // set user as static 
-            const users = {
+            const users = [{
                 id: 1,
                 first_name: "Satnam",
                 last_name: "Decor",
                 email: "admin@satnam.com",
                 // password: bcrypt.hashSync("123456", 10)
                 password: "123456"
-            }
+            }];
 
             const user = users.find(user => user.email === email)
 
