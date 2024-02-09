@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -12,14 +12,16 @@ module.exports = {
                 id: 1,
                 name: "John Doe",
                 email: "21bmiit145@gmail.com",
-                password: bcrypt.hashSync("123456", 10)
+                // password: bcrypt.hashSync("123456", 10)
+                password: "123456"
             }
 
             if (!user) {
                 return res.status(400).json({ message: 'User not found' });
             }
 
-            const isMatch = await bcrypt.compare(password, user.password);
+            // const isMatch = await bcrypt.compare(password, user.password);
+            const isMatch = password === user.password;
 
             if (!isMatch) {
                 return res.status(400).json({ message: 'Invalid credentials' });
