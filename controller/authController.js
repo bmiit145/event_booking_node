@@ -18,7 +18,7 @@ module.exports = {
                 password: "123456"
             }
 
-            const user = find(users, { email });
+            const user = users.find(user => user.email === email)
 
             if (!user) {
                 return res.status(400).json({ message: 'User not found' });
