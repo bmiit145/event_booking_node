@@ -16,9 +16,31 @@ module.exports = {
                 last_name: "Decor",
                 email: "admin@satnam.com",
                 password: bcrypt.hashSync("123456", 12)
-                // password: "123456"
+            },
+            {
+                id: 2,
+                first_name: "Satnam",
+                last_name: "Decor",
+                email: "kuldeep@satnam.com",
+                password: bcrypt.hashSync("123456", 12)
+            
+            },
+            {
+                id: 3,
+                first_name: "Satnam",
+                last_name: "Decor",
+                email: "ankush@satnam.com",
+                password: bcrypt.hashSync("123456", 12)
+            
+            },
+            {
+                id: 4,
+                first_name: "Satnam",
+                last_name: "Decor",
+                email: "ajay@satnam.com",
+                password: bcrypt.hashSync("123456", 12)
+            
             }];
-
             const user = users.find(user => user.email === email)
 
             if (!user) {

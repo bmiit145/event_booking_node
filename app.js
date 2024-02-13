@@ -2,6 +2,8 @@ const express = require('express')
 const app = express();
 const port = 4001
 const cors = require('cors');
+const User = require('./models/User');
+const bcrypt = require('bcrypt');
 
 // Allow requests from any origin
 // Enable CORS for all routes
@@ -30,6 +32,61 @@ mongoose.connect("mongodb+srv://21bmiit145:root@satnam-decor.kya4kd2.mongodb.net
 }).catch((err) => {
     console.log(err);
 })
+
+
+// default users
+const userData = [{
+    id: 1,
+    first_name: "Satnam",
+    last_name: "Decor",
+    email: "admin@satnam.com",
+    password: bcrypt.hashSync("123456", 12)
+},
+{
+    id: 2,
+    first_name: "Satnam",
+    last_name: "Decor",
+    email: "kuldeep@satnam.com",
+    password: bcrypt.hashSync("123456", 12)
+
+},
+{
+    id: 3,
+    first_name: "Satnam",
+    last_name: "Decor",
+    email: "ankush@satnam.com",
+    password: bcrypt.hashSync("123456", 12)
+
+},
+{
+    id: 4,
+    first_name: "Satnam",
+    last_name: "Decor",
+    email: "ajay@satnam.com",
+    password: bcrypt.hashSync("123456", 12)
+
+}];
+
+const savePromises = userData.map(async (u) => {
+    // Check if the user already exists by email or id
+    const existingUser = await User.findOne({ $or: [{ id: u.id }, { email: u.email }] });
+
+    if (!existingUser) {
+        // User does not exist, save it
+        await new User(u).save();
+        // console.log(`User with email ${u.email} added.`);
+    } else {
+        // console.log(`User with email ${u.email} already exists, skipping.`);
+    }
+});
+
+Promise.all(savePromises)
+    .then(() => {
+        console.log('All users have been processed.');
+    })
+    .catch(error => {
+        console.error('Error processing users:', error);
+    });
 
 
 const routes = require("./router");
