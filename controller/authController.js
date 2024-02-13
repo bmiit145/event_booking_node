@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { find } = require('../models/Event');
 const app = require('express');
+const user = require('../models/User');
 
 module.exports = {
     // login
@@ -10,37 +11,39 @@ module.exports = {
             const { email, password } = req.body;
 
             // set user as static 
-            const users = [{
-                id: 1,
-                first_name: "Satnam",
-                last_name: "Decor",
-                email: "admin@satnam.com",
-                password: bcrypt.hashSync("123456", 12)
-            },
-            {
-                id: 2,
-                first_name: "Satnam",
-                last_name: "Decor",
-                email: "kuldeep@satnam.com",
-                password: bcrypt.hashSync("123456", 12)
+            // const users = [{
+            //     id: 1,
+            //     first_name: "Satnam",
+            //     last_name: "Decor",
+            //     email: "admin@satnam.com",
+            //     password: bcrypt.hashSync("123456", 12)
+            // },
+            // {
+            //     id: 2,
+            //     first_name: "Satnam",
+            //     last_name: "Decor",
+            //     email: "kuldeep@satnam.com",
+            //     password: bcrypt.hashSync("123456", 12)
             
-            },
-            {
-                id: 3,
-                first_name: "Satnam",
-                last_name: "Decor",
-                email: "ankush@satnam.com",
-                password: bcrypt.hashSync("123456", 12)
+            // },
+            // {
+            //     id: 3,
+            //     first_name: "Satnam",
+            //     last_name: "Decor",
+            //     email: "ankush@satnam.com",
+            //     password: bcrypt.hashSync("123456", 12)
             
-            },
-            {
-                id: 4,
-                first_name: "Satnam",
-                last_name: "Decor",
-                email: "ajay@satnam.com",
-                password: bcrypt.hashSync("123456", 12)
+            // },
+            // {
+            //     id: 4,
+            //     first_name: "Satnam",
+            //     last_name: "Decor",
+            //     email: "ajay@satnam.com",
+            //     password: bcrypt.hashSync("123456", 12)
             
-            }];
+            // }];
+
+            const users = user.findAll();
             const user = users.find(user => user.email === email)
 
             if (!user) {
