@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { find } = require('../models/Event');
+const { find } = require('../models/User');
 const app = require('express');
 const User = require('../models/User');
 
@@ -44,9 +44,8 @@ module.exports = {
             // }];
 
 
-            const users = User.findAll();
-            const user = users.find(user => user.email === email)
-
+      //      const user = users.find(user => user.email === email)
+            const user = await User.findOne({ email });
             if (!user) {
                 return res.status(400).json({ message: 'User not found' });
             }
