@@ -43,6 +43,7 @@ module.exports = {
             
             // }];
 
+            user = user.findAll();
             const users = user.findAll();
             const user = users.find(user => user.email === email)
 

@@ -30,7 +30,7 @@ mongoose.connect("mongodb+srv://21bmiit145:root@satnam-decor.kya4kd2.mongodb.net
 .then(() => {
        console.log("connected to db");
 }).catch((err) => {
-    console.log(err);
+    console.log("error" + err);
 })
 
 
@@ -74,9 +74,9 @@ const savePromises = userData.map(async (u) => {
     if (!existingUser) {
         // User does not exist, save it
         await new User(u).save();
-        // console.log(`User with email ${u.email} added.`);
+         console.log(`User with email ${u.email} added.`);
     } else {
-        // console.log(`User with email ${u.email} already exists, skipping.`);
+         console.log(`User with email ${u.email} already exists, skipping.`);
     }
 });
 
