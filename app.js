@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express();
-const port = 4001
+const port = 3000
 const cors = require('cors');
 const User = require('./models/User');
 const bcrypt = require('bcrypt');
@@ -24,15 +24,18 @@ app.use(express.urlencoded({ extended: true }));
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb+srv://21bmiit145:root@satnam-decor.kya4kd2.mongodb.net/satnam_decor?retryWrites=true&w=majority", {
-    family: 4,
-})
-    .then(() => {
-        console.log("connected to db");
-        creationOfUser();
-    }).catch((err) => {
-        console.log("error  ::: " + err);
-    })
+const mongooseConn = () => {
+    mongoose.connect("mongodb+srv://21bmiit145:root@satnam-decor.kya4kd2.mongodb.net/satnam_decor?retryWrites=true&w=majority", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => {
+            console.log("connected to db");
+            creationOfUser();
+        }).catch((err) => {
+            console.log("error  ::: " + err);
+            //mongooseConn();
+        })
+}
 
 const creationOfUser = async () => {
     // default users
@@ -103,4 +106,5 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.listen(port, () => console.log(`contact  app listening on port ${port}!`));
+mongooseConn();
+app.listen(port, () => console.log(`app listening on port ${port}!`));
