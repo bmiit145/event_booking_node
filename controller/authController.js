@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { find } = require('../models/Event');
 const app = require('express');
-const user = require('../models/User');
+const User = require('../models/User');
 
 module.exports = {
     // login
@@ -43,8 +43,8 @@ module.exports = {
             
             // }];
 
-            user = user.findAll();
-            const users = user.findAll();
+
+            const users = User.findAll();
             const user = users.find(user => user.email === email)
 
             if (!user) {
